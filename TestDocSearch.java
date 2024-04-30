@@ -48,5 +48,23 @@ public class TestDocSearch {
     String expect = String.format("Found 0 paths:\n");
     assertEquals(expect, h.handleRequest(rootPath));
 	}
+
+    @Test
+    public void testQueryTitleWithResults1() throws URISyntaxException, IOException {
+    Handler h = new Handler("./technical/");
+    String sep = File.separator;
+    URI rootPath = new URI("http://localhost/search?title=ar615");
+    String expected = String.format("Found 1 paths:\n.%stechnical%sbiomed%sar615.txt", sep, sep, sep);
+    assertEquals(expected, h.handleRequest(rootPath));
+    }
+
+    @Test
+    public void testQueryTitleWithResults2() throws URISyntaxException, IOException {
+    Handler h = new Handler("./technical/");
+    String sep = File.separator;
+    URI rootPath = new URI("http://localhost/search?title=700");
+    String expected = String.format("Found 3 paths:\n.%stechnical%sgovernment%sGen_Account_Office%sog97001.txt\n.%stechnical%sgovernment%sGen_Account_Office%sog97002.txt\n.%stechnical%sgovernment%sGen_Account_Office%sog97003.txt", sep, sep, sep, sep, sep, sep, sep, sep, sep, sep, sep, sep);
+    assertEquals(expected, h.handleRequest(rootPath));
+    }
 }
 
